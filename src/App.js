@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{useState} from 'react';
+// import browser from 'webextension-polyfill';
+import browserMock from 'webextensions-api-mock';
 import './App.css';
+import Dashboard from './components/Dashboard'
 
 function App() {
+
+  const [bookmarks, setBookmarks] = useState();
+
+  const browser = browserMock();
+
+  if ( typeof browser !== 'undefined' ) {
+
+    if ( !bookmarks ) {
+      browser.bookmarks.getTree().then( (items) => {
+        const root = items[0];
+        console.log(root);
+        setBookmarks( root['children'] );
+      });
+    }    
+  }
+
+  if (!bookmarks) {
+    return "loading bookmarks...";
+  }
+  
+console.log(bookmarks);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Dashboard bookmarks={bookmarks} />
   );
 }
 
