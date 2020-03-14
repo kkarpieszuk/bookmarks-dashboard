@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Bookmark = ({bookmark}) => {
-    return (<div className='bookmark'>
+const Bookmark = ({bookmark, onclick}) => {
+    return (<div className='bookmark' id={bookmark.id} onClick={onclick}>
         <h1>{bookmark.title}</h1>
-        <a href='https://muzungu.pl' target='_blank' rel='noopener noreferrer' >https://muzungu.pl</a>
+        <a href={bookmark.url} target='_blank' rel='noopener noreferrer' >{bookmark.url}</a>
     </div>)
 }
 
