@@ -11,6 +11,9 @@
 # production
 /build
 
+# bookmarks mock
+/src/bookmarks.json
+
 # misc
 .DS_Store
 .env.local
