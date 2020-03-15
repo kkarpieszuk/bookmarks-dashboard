@@ -1,10 +1,11 @@
 import React from 'react';
 import Bookmark from '../Bookmark';
+import ReturnBookmark from '../ReturnBookmark';
 
-const Dashboard = ( {bookmarks, onbookmarkclick} ) => {
-
+const Dashboard = ( props ) => {
     return (<div className='dashboard'>
-        {bookmarks.map( el => <Bookmark bookmark={el} key={el.id} onclick={onbookmarkclick} /> )}    
+        <ReturnBookmark onclick={props.backBookmarksTree} previousBookmarks={props.previousBookmarks} />
+        {props.bookmarks.map( el => <Bookmark bookmark={el} key={el.id} onclick={props.onbookmarkclick} /> )}    
     </div>
     )
 }

@@ -6,15 +6,22 @@ import getBookmarks from './getfakebookmarks'; // fake bookmarks
 
 function App() {
   const [bookmarks, setBookmarks] = useState();
+  const [previousBookmarks, setPreviousBookmarks] = useState();
 
   const bookmarkClicked = (event) => {
-      console.log( event.target.id );
-      const clicked = bookmarks.find( el => el.id === event.target.id );
+      const target_id = event.target.id;
+      console.log( target_id );
+      const clicked = bookmarks.find( el => el.id === target_id );
       if ( clicked.children ) {
+        setPreviousBookmarks(bookmarks)
         setBookmarks( clicked.children );
       } else if ( clicked.url) {
         window.open( clicked.url, '_blank' );
       }
+  }
+
+  const backBookmarksTree = () => {
+    setBookmarks( previousBookmarks );
   }
     
   if (!bookmarks) {
@@ -26,7 +33,10 @@ function App() {
   }
 
   return (
-    <Dashboard bookmarks={bookmarks} onbookmarkclick={bookmarkClicked} />
+    <Dashboard bookmarks={bookmarks} 
+                onbookmarkclick={bookmarkClicked} 
+                backBookmarksTree={backBookmarksTree}
+                previousBookmarks={previousBookmarks} />
   );
 }
 
