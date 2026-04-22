@@ -1,0 +1,13 @@
+[
+  {
+    "id": "root",
+    "title": "Root",
+    "children": [
+      {
+        "id": "b1",
+        "title": "Example",
+        "url": "https://example.com"
+      }
+    ]
+  }
+]
